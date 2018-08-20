@@ -22,6 +22,6 @@ public class CategoriaResource {
 		
 		Categoria categoria = categoriaService.buscar(id);
 		
-		return ResponseEntity.ok(categoria);
+		return ResponseEntity.ok().body(categoria);
 	}
 }
