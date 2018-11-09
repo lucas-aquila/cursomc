@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.lucasaquila.cursomc.domain.Categoria;
+import com.lucasaquila.cursomc.domain.Cliente;
 import com.lucasaquila.cursomc.dto.CategoriaDTO;
 import com.lucasaquila.cursomc.exceptions.DataIntegrityException;
 import com.lucasaquila.cursomc.exceptions.ObjectNotFoundException;
@@ -45,8 +46,16 @@ public class CategoriaService {
 	 * @return
 	 */
 	public Categoria update(Categoria obj) {
-		find(obj.getId());
-		return categoriaRepository.save(obj);
+		Categoria newObj = find(obj.getId());
+		updateData(newObj, obj);
+		return categoriaRepository.save(newObj);
+	}
+
+	/**
+	 * 
+	 */
+	private void updateData(Categoria newObj, Categoria obj) {
+		newObj.setNome(obj.getNome());
 	}
 
 	/**
