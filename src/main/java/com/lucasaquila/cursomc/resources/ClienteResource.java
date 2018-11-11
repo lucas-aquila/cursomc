@@ -19,6 +19,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.lucasaquila.cursomc.domain.Cliente;
 import com.lucasaquila.cursomc.dto.ClienteDTO;
+import com.lucasaquila.cursomc.dto.ClienteNewDTO;
 import com.lucasaquila.cursomc.services.ClienteService;
 
 @RestController
@@ -40,7 +41,7 @@ public class ClienteResource {
 	 * RequestBody faz o JSON ser convertido para o objeto java automaticamente 
 	 */
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteDTO objDto) {
+	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDTO objDto) {
 		Cliente obj = clienteService.fromDTO(objDto);
 		obj = clienteService.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()

@@ -3,6 +3,8 @@ package com.lucasaquila.cursomc.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -19,12 +21,17 @@ import com.lucasaquila.cursomc.dto.ClienteNewDTO;
 import com.lucasaquila.cursomc.exceptions.DataIntegrityException;
 import com.lucasaquila.cursomc.exceptions.ObjectNotFoundException;
 import com.lucasaquila.cursomc.repositories.ClienteRepository;
+import com.lucasaquila.cursomc.repositories.EnderecoRepository;
 
 @Service
 public class ClienteService {
 	
 	@Autowired
 	private ClienteRepository clienteRepository;
+	
+	@Autowired
+	private EnderecoRepository enderecoRepository;
+	
 
 	/**
 	 * @param id
@@ -40,9 +47,12 @@ public class ClienteService {
 	 * @param obj
 	 * @return
 	 */
+	@Transactional
 	public Cliente insert(Cliente obj) {
 		obj.setId(null);
-		return clienteRepository.save(obj);
+		obj = clienteRepository.save(obj);
+		enderecoRepository.saveAll(obj.getEnderecos());
+		return obj;
 	}
 	
 	/**
