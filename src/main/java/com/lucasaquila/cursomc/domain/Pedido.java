@@ -63,6 +63,15 @@ public class Pedido implements Serializable{
 		this.cliente = cliente;
 		this.enderecoDeEntrega = enderecoDeEntrega;
 	}
+	
+	//O get é necessário para o JSON reconhecer o método e serializar diretamente como um atributo valorTotal
+	public double getValorTotal() {
+		double soma = 0.0;
+		for(ItemPedido ip : itens) {
+			soma += ip.getSubTotal();
+		}
+		return soma;
+	}
 
 	/**
 	 * 
