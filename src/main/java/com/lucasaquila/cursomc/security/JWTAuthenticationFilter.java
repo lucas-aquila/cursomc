@@ -81,9 +81,6 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 + "\"path\": \"/login\"}";
         }
     }
-	
-	
-
 
 	
 }
