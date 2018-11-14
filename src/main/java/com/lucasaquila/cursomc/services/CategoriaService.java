@@ -12,9 +12,9 @@ import org.springframework.stereotype.Service;
 
 import com.lucasaquila.cursomc.domain.Categoria;
 import com.lucasaquila.cursomc.dto.CategoriaDTO;
-import com.lucasaquila.cursomc.exceptions.DataIntegrityException;
-import com.lucasaquila.cursomc.exceptions.ObjectNotFoundException;
 import com.lucasaquila.cursomc.repositories.CategoriaRepository;
+import com.lucasaquila.cursomc.services.exceptions.DataIntegrityException;
+import com.lucasaquila.cursomc.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class CategoriaService {
@@ -78,7 +78,7 @@ public class CategoriaService {
 	}
 	
 	public Page<Categoria> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
-		PageRequest pageRequest = new PageRequest(page, linesPerPage, Direction.valueOf(direction), orderBy);
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		return categoriaRepository.findAll(pageRequest);
 		
 	}

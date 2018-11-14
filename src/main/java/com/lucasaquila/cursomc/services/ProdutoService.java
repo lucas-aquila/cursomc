@@ -11,9 +11,9 @@ import org.springframework.stereotype.Service;
 
 import com.lucasaquila.cursomc.domain.Categoria;
 import com.lucasaquila.cursomc.domain.Produto;
-import com.lucasaquila.cursomc.exceptions.ObjectNotFoundException;
 import com.lucasaquila.cursomc.repositories.CategoriaRepository;
 import com.lucasaquila.cursomc.repositories.ProdutoRepository;
+import com.lucasaquila.cursomc.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class ProdutoService {

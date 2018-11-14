@@ -20,12 +20,12 @@ import com.lucasaquila.cursomc.domain.enums.Perfil;
 import com.lucasaquila.cursomc.domain.enums.TipoCliente;
 import com.lucasaquila.cursomc.dto.ClienteDTO;
 import com.lucasaquila.cursomc.dto.ClienteNewDTO;
-import com.lucasaquila.cursomc.exceptions.AuthorizationException;
-import com.lucasaquila.cursomc.exceptions.DataIntegrityException;
-import com.lucasaquila.cursomc.exceptions.ObjectNotFoundException;
 import com.lucasaquila.cursomc.repositories.ClienteRepository;
 import com.lucasaquila.cursomc.repositories.EnderecoRepository;
 import com.lucasaquila.cursomc.security.UserSS;
+import com.lucasaquila.cursomc.services.exceptions.AuthorizationException;
+import com.lucasaquila.cursomc.services.exceptions.DataIntegrityException;
+import com.lucasaquila.cursomc.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class ClienteService {
@@ -104,7 +104,7 @@ public class ClienteService {
 	}
 	
 	public Page<Cliente> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
-		PageRequest pageRequest = new PageRequest(page, linesPerPage, Direction.valueOf(direction), orderBy);
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		return clienteRepository.findAll(pageRequest);
 		
 	}

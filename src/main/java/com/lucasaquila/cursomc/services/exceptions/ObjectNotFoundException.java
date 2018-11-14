@@ -1,4 +1,4 @@
-package com.lucasaquila.cursomc.exceptions;
+package com.lucasaquila.cursomc.services.exceptions;
 
 public class ObjectNotFoundException extends RuntimeException {
 
