@@ -40,6 +40,19 @@ public class ClienteResource {
 	}
 	
 	/**
+
+	 * @param email
+	 * @return
+	 */
+	@RequestMapping(value = "/email", method = RequestMethod.GET)
+	public ResponseEntity<Cliente> find(@RequestParam(value="value") String email) {
+		
+		Cliente cliente = clienteService.findByEmail(email);
+		
+		return ResponseEntity.ok().body(cliente);
+	}
+	
+	/**
 	 * RequestBody faz o JSON ser convertido para o objeto java automaticamente 
 	 */
 	@RequestMapping(method = RequestMethod.POST)
