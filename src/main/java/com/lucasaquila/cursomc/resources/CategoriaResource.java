@@ -61,7 +61,7 @@ public class CategoriaResource {
 	 * @param id
 	 * @return
 	 */
-	@PreAuthorize("hasAnyHole('ADMIN')")
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Void> update(@Valid @RequestBody CategoriaDTO objDto, @PathVariable Integer id){
 		Categoria obj = categoriaService.fromDTO(objDto);
