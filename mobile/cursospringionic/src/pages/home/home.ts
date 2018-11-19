@@ -13,6 +13,8 @@ export class HomePage {
   }
 
   login() {
+    //setRoot navega para página sem a possibilidade de retornar para tela que chamou, 
+    //ao contrário do push que sobrepõe uma tela em cima da outra
     this.navCtrl.setRoot('CategoriasPage');
   }
 
