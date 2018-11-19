@@ -33,9 +33,7 @@ export class CategoriasPage {
     this.categoriaService.findAll().subscribe(result => {
       this.categorias = result;
     },
-    error => {
-      console.log(error);
-    });
+    error => {});
   }
 
 }
