@@ -15,10 +15,13 @@
 
 </ion-header>
 
-
 <ion-content padding>
-<p>Página de categorias</p>
+  <ion-list>
+    <button ion-item *ngFor="let categoria of categorias">
+      <ion-thumbnail item-start>
+        <img src="{{bucketUrl}}/cat{{categoria.id}}.jpg">
+      </ion-thumbnail>
+      <h2>{{ categoria.nome }}</h2>
+    </button>
+  </ion-list>
 </ion-content>
-
-
-
