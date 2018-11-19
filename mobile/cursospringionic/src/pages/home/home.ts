@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, IonicPage, MenuController } from 'ionic-angular';
 import { CredenciaisDTO } from '../../models/credenciais.dto';
+import { AuthService } from '../../services/auth.service';
 
 @IonicPage()
 @Component({
@@ -16,7 +17,8 @@ export class HomePage {
 
   constructor(
     public navCtrl: NavController,
-    public menu: MenuController) {
+    public menu: MenuController,
+    public auth: AuthService) {
   }
 
   
@@ -31,10 +33,14 @@ export class HomePage {
   }
   
   login() {
-
-    console.log(this.credenciais);
-    //setRoot navega para página sem a possibilidade de retornar para tela que chamou, 
-    //ao contrário do push que sobrepõe uma tela em cima da outra
-    this.navCtrl.setRoot('CategoriasPage');
+    this.auth.authenticate(this.credenciais)
+    .subscribe(result => {
+      console.log(result.headers.get('Authorization'));
+      
+      //setRoot navega para página sem a possibilidade de retornar para tela que chamou, 
+      //ao contrário do push que sobrepõe uma tela em cima da outra
+      this.navCtrl.setRoot('CategoriasPage');
+    },
+    error => {});
   }
 }
