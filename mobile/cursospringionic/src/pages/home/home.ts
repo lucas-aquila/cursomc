@@ -18,7 +18,7 @@ export class HomePage {
   constructor(
     public navCtrl: NavController,
     public menu: MenuController,
-    public auth: AuthService) {
+    public authService: AuthService) {
   }
 
   
@@ -33,9 +33,9 @@ export class HomePage {
   }
   
   login() {
-    this.auth.authenticate(this.credenciais)
+    this.authService.authenticate(this.credenciais)
     .subscribe(result => {
-      console.log(result.headers.get('Authorization'));
+      this.authService.successfulLogin(result.headers.get('Authorization'));
       
       //setRoot navega para página sem a possibilidade de retornar para tela que chamou, 
       //ao contrário do push que sobrepõe uma tela em cima da outra
