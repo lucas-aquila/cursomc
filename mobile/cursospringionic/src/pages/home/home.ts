@@ -31,6 +31,19 @@ export class HomePage {
   ionViewDidLeave(){
     this.menu.swipeEnable(true);
   }
+
+  //Quando já entrou na página
+  ionViewDidEnter(){
+    this.authService.refreshToken()
+    .subscribe(result => {
+      this.authService.successfulLogin(result.headers.get('Authorization'));
+      
+      //setRoot navega para página sem a possibilidade de retornar para tela que chamou, 
+      //ao contrário do push que sobrepõe uma tela em cima da outra
+      this.navCtrl.setRoot('CategoriasPage');
+    },
+    error => {});
+  }
   
   login() {
     this.authService.authenticate(this.credenciais)
