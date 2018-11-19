@@ -4,9 +4,12 @@ import { Injectable } from "@angular/core";
 import { CredenciaisDTO } from "../models/credenciais.dto";
 import { LocalUser } from '../models/local_user';
 import { StorageService } from './storage.service';
+import { JwtHelper} from 'angular2-jwt';
 
 @Injectable()
 export class AuthService {
+
+    jwtHelper: JwtHelper = new JwtHelper();
 
     constructor(
         public http: HttpClient,
@@ -28,7 +31,9 @@ export class AuthService {
         //É necessário fazer o substring para retirar o BEARER do token, pois vem como padrão.
         let token = authrizationValue.substring(7);
         let user : LocalUser = {
-            token: token
+            token: token,
+            // Recupera o email a partir do token
+            email: this.jwtHelper.decodeToken(token).sub,
         };
 
         this.storage.setLocalUser(user);
