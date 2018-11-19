@@ -20,6 +20,8 @@ import { subscribeOn } from 'rxjs/operator/subscribeOn';
 })
 export class ProfilePage {
 
+  imageFolder: string = API_CONFIG.imageFolder;
+
   cliente: ClienteDTO;
 
   constructor(
@@ -35,7 +37,7 @@ export class ProfilePage {
       this.clienteService.findByEmail(localUser.email)
         .subscribe(result => {
           this.cliente = result;
-          this.getImageIfExists();
+          // this.getImageIfExists();
 
         },
         error => {});
