@@ -1,3 +1,4 @@
+import { ProdutoService } from './../../services/domain/produto.service';
 import { API_CONFIG } from './../../config/api.config';
 import { ProdutoDTO } from './../../models/produto.dto';
 import { Component } from '@angular/core';
@@ -14,24 +15,18 @@ export class ProdutosPage {
 
   constructor(
     public navCtrl: NavController, 
-    public navParams: NavParams) {
+    public navParams: NavParams,
+    public produtoService: ProdutoService) {
   }
 
   imageFolder: string = API_CONFIG.imageFolder;
 
   ionViewDidLoad() {
-    this.items = [
-      {
-        id: "1",
-        nome: 'Mouse',
-        preco: 80.99
-      },
-      {
-        id: "2",
-        nome: 'Teclado',
-        preco: 100.00
-      }
-    ]
+    let categoriaId = this.navParams.get('categoriaId');
+    this.produtoService.findByCategoria(categoriaId)
+      .subscribe(result => {
+        this.items = result['content'];
+      }, error => {});
   }
 
 }

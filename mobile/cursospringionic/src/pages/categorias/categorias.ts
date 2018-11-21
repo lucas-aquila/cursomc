@@ -23,14 +23,15 @@ export class CategoriasPage {
 
   ionViewDidLoad() {
     //É uma chamada assincrona, você precisa se inscrever(subscribe) para fazer algo quando a resposta chegar
-    this.categoriaService.findAll().subscribe(result => {
+    this.categoriaService.findAll()
+      .subscribe(result => {
       this.categorias = result;
     },
     error => {});
   }
 
-  showProdutos() {
-    this.navCtrl.push('ProdutosPage');
+  showProdutos(categoriaId : string) {
+    this.navCtrl.push('ProdutosPage',{ categoriaId: categoriaId });
   }
 
 }
