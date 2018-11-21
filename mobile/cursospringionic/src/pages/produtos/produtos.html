@@ -4,18 +4,21 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>categorias</ion-title>
+    <ion-title>Produtos</ion-title>
   </ion-navbar>
 
 </ion-header>
 
+
 <ion-content padding>
+  <h1>teste</h1>
   <ion-list>
-    <button ion-item *ngFor="let categoria of categorias" (click)="showProdutos()">
+    <button ion-item *ngFor="let item of items">
       <ion-thumbnail item-start>
-        <img src="{{bucketUrl}}/cat{{categoria.id}}.jpg">
+        <img [src]="item.imageUrl || imageFolder + '/prod.jpg'"/>
       </ion-thumbnail>
-      <h2>{{ categoria.nome }}</h2>
+      <h2>{{ item.nome}}</h2>
+      <p>item.preco | currency</p>
     </button>
-  </ion-list>
+  </ion-list> 
 </ion-content>
