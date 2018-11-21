@@ -24,7 +24,7 @@ export class ClienteService {
         return this.http.get(url, {responseType : 'blob'});
     }
 
-    isert(obj : ClienteDTO) {
+    insert(obj : ClienteDTO) {
         return this.http.post(
             `${API_CONFIG.baseUrl}/clientes`,
             obj,

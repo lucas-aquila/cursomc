@@ -69,7 +69,7 @@ export class SignupPage {
   }
 
   signupUser(){
-    this.clienteService.isert(this.formGroup.value)
+    this.clienteService.insert(this.formGroup.value)
       .subscribe(result => {
         this.showInsertOk();
       },
