@@ -6,13 +6,6 @@ import { ClienteDTO } from '../../models/cliente.dto';
 import { ClienteService } from '../../services/domain/cliente.service';
 import { subscribeOn } from 'rxjs/operator/subscribeOn';
 
-/**
- * Generated class for the ProfilePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-profile',
@@ -36,7 +29,7 @@ export class ProfilePage {
     if(localUser && localUser.email) {
       this.clienteService.findByEmail(localUser.email)
         .subscribe(result => {
-          this.cliente = result;
+          this.cliente = result as ClienteDTO;
           this.getImageIfExists();
 
         },
