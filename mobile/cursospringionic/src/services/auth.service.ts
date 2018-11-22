@@ -1,3 +1,4 @@
+import { CartService } from './domain/cart.service';
 import { API_CONFIG } from './../config/api.config';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from "@angular/core";
@@ -13,7 +14,8 @@ export class AuthService {
 
     constructor(
         public http: HttpClient,
-        public storage: StorageService
+        public storage: StorageService,
+        public carService: CartService
     ){
 
     }
@@ -37,6 +39,7 @@ export class AuthService {
         };
 
         this.storage.setLocalUser(user);
+        this.carService.createOrClearCart();
     }
 
     logout() {
