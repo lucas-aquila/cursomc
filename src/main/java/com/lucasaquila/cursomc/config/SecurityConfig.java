@@ -69,7 +69,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		//Utiliza as configurações padrões definidas do cors no método corsConfigurationSource
 		//Desabilita o csrf pois o sistema é stateless, não armazena dados da autenticação em seção.
 		http.cors().and().csrf().disable();
-		
+
 		//Vai permitir o acesso a todos que estiverem no antMatchers().permitAll()
 		//E o restante anyRequest() irá exigir autenticação
 		http.authorizeRequests()
