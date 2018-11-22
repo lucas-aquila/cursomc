@@ -14,9 +14,9 @@
           {{item?.nome}}
           </ion-card-title>
         <p>
-          {{item?.preco | currency}}
+          {{item?.preco | currency:'BRL'}}
         </p>
       </ion-card-content>
     </ion-card>
-     <button ion-button block outline>Adicionar ao carrinho</button>
+     <button ion-button block outline (click)="addToCart(item)" >Adicionar ao carrinho</button>
   </ion-content>

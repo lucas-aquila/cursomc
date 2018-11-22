@@ -1,3 +1,4 @@
+import { Cart } from './../models/cart';
 import { Injectable } from "@angular/core";
 import { LocalUser } from "../models/local_user";
 import { STORAGE_KEYS } from "../config/storage_keys.config";
@@ -24,6 +25,28 @@ export class StorageService {
         else {
             //Coloca no LocalStorage convertendo o objeto JSON para uma string (JSON.stringfy)
             localStorage.setItem(STORAGE_KEYS.localUser, JSON.stringify(obj));
+        }
+    }
+
+    getCart() : Cart {
+        let usr = localStorage.getItem(STORAGE_KEYS.cart);
+        if(usr == null) {
+            return null;
+        }
+        else {
+            //Converte o objeto string que está vindo do LocalStorage para JSON
+            return JSON.parse(usr);
+        }
+    }
+
+    setCart(obj : Cart) {
+        if( obj == null) {
+            //Se objeto vier nulo, removemos o objeto chave/valor do LocalStorage
+            localStorage.removeItem(STORAGE_KEYS.cart);
+        } 
+        else {
+            //Coloca no LocalStorage convertendo o objeto JSON para uma string (JSON.stringfy)
+            localStorage.setItem(STORAGE_KEYS.cart, JSON.stringify(obj));
         }
     }
 }
