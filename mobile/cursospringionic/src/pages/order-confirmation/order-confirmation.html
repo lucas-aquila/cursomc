@@ -18,9 +18,9 @@
             <img [src]="item.produto.imageUrl || 'assets/imgs/prod.jpg'">
           </ion-thumbnail>
           <h2>{{item.produto.nome}}</h2>
-          <p>{{item.produto.preco | currency}}</p>
+          <p>{{item.produto.preco | currency: 'BRL'}}</p>
           <p class="nolinebreak">{{item.quantidade}}</p>
-          <p item-end>{{item.produto.preco * item.quantidade | currency}}</p>
+          <p item-end>{{item.produto.preco * item.quantidade | currency: 'BRL'}}</p>
         </ion-item> 
          <ion-item>
           <h2>Total</h2>
@@ -61,4 +61,7 @@
         <h3>Pagamento com boleto</h3>
       </ion-item>
     </ion-card>
+
+    <button ion-button block (click)="checkout()">Confirmar Pedido</button>
+    <button ion-button outline block (click)="back()">Voltar</button>
   </ion-content>
