@@ -11,7 +11,11 @@ import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-an
 })
 export class ProdutosPage {
 
-  items : ProdutoDTO[];
+  items : ProdutoDTO[] = [];
+  page: number = 0;
+
+
+
 
   constructor(
     public navCtrl: NavController, 
@@ -29,18 +33,22 @@ export class ProdutosPage {
   loadingCategorias() {
     let categoriaId = this.navParams.get('categoriaId');
     let loader = this.presentLoading();
-    this.produtoService.findByCategoria(categoriaId)
+    this.produtoService.findByCategoria(categoriaId, this.page, 10)
       .subscribe(result => {
-        this.items = result['content'];
+        let start = this.items.length;
+        this.items = this.items.concat(result['content']);
+        let end = this.items.length - 1;
         loader.dismiss();
-        this.loadImageUrls();
+        this.loadImageUrls(start, end);
       }, error => {
         loader.dismiss();
       });
   }
 
-  loadImageUrls() {
-    for( var i=0; i < this.items.length; i++) {
+  // Foi necessário passar o start e o end como parâmetro
+  //para não carregarmos as imagens toda vez que chamar o doInfinite, assim só é chamada as categorias concatenadas
+  loadImageUrls(start: number, end: number) {
+    for( var i=start; i <= end; i++) {
       let item = this.items[i];
       this.produtoService.getSmallImageFromBucket(item.id)
         .subscribe(result => {
@@ -63,9 +71,19 @@ export class ProdutosPage {
   }
 
   doRefresh(refresher) {
+    this.page = 0;
+    this.items = [];
     this.loadingCategorias();
     setTimeout(() => {
       refresher.complete();
+    }, 1000);
+  }
+
+  doInfinite(infiniteScroll) {
+    this.page++;
+    this.loadingCategorias();
+    setTimeout(() => {
+      infiniteScroll.complete();
     }, 1000);
   }
 
