@@ -23,6 +23,10 @@ export class ProdutosPage {
   imageFolder: string = API_CONFIG.imageFolder;
 
   ionViewDidLoad() {
+    this.loadingCategorias();
+  }
+
+  loadingCategorias() {
     let categoriaId = this.navParams.get('categoriaId');
     let loader = this.presentLoading();
     this.produtoService.findByCategoria(categoriaId)
@@ -56,6 +60,13 @@ export class ProdutosPage {
     });
     loader.present();
     return loader;
+  }
+
+  doRefresh(refresher) {
+    this.loadingCategorias();
+    setTimeout(() => {
+      refresher.complete();
+    }, 1000);
   }
 
 }
