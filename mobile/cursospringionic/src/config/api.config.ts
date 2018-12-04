@@ -1,5 +1,9 @@
 export const API_CONFIG = {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    // baseUrl: "https://la-spring-ionic.herokuapp.com",
+>>>>>>> 900c79e... Commit para subir no Heroku
 =======
     // baseUrl: "https://la-spring-ionic.herokuapp.com",
 >>>>>>> 900c79e... Commit para subir no Heroku
