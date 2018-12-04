@@ -76,11 +76,11 @@ export class ProfilePage {
      this.picture = 'data:image/png;base64,' + imageData;
      this.cameraOn = false;
     }, (err) => {
+      this.cameraOn = false;
     });
   }
 
   getGalleryPicture() {
-
     this.cameraOn = true;
 
     const options: CameraOptions = {
@@ -96,6 +96,7 @@ export class ProfilePage {
      this.picture = 'data:image/png;base64,' + imageData;
      this.cameraOn = false;
     }, (err) => {
+      this.cameraOn = false;
     });
   }
 
