@@ -22,6 +22,10 @@ import com.lucasaquila.cursomc.domain.Categoria;
 import com.lucasaquila.cursomc.dto.CategoriaDTO;
 import com.lucasaquila.cursomc.services.CategoriaService;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 @RestController
 @RequestMapping(value="/categorias")
 public class CategoriaResource {
@@ -34,6 +38,7 @@ public class CategoriaResource {
 	 * @param id
 	 * @return
 	 */
+	@ApiOperation(value = "Busca por id")
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Categoria> find(@PathVariable Integer id) {
 		
@@ -46,6 +51,7 @@ public class CategoriaResource {
 	 * RequestBody faz o JSON ser convertido para o objeto java automaticamente 
 	 */
 	@PreAuthorize("hasAnyRole('ADMIN')")
+	@ApiOperation(value = "Insere categoria")
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> insert(@Valid @RequestBody CategoriaDTO objDto) {
 		Categoria obj = categoriaService.fromDTO(objDto);
@@ -77,6 +83,9 @@ public class CategoriaResource {
 	 */
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	@ApiResponses(value = {
+			@ApiResponse(code = 400, message = "Não é possível excluir uma categoria que possui produtos"),
+			@ApiResponse(code = 404, message = "Código inexistente") })
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 		
 		categoriaService.delete(id);
@@ -89,6 +98,7 @@ public class CategoriaResource {
 	 * @param id
 	 * @return
 	 */
+	@ApiOperation(value="Retorna todas categorias")
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<CategoriaDTO>> findAll() {
 		
@@ -103,6 +113,7 @@ public class CategoriaResource {
 	 * @param id
 	 * @return
 	 */
+	@ApiOperation(value="Retorna todas categorias com paginação")
 	@RequestMapping(value="/page", method = RequestMethod.GET)
 	public ResponseEntity<Page<CategoriaDTO>> findPage(
 			@RequestParam(value="page", defaultValue="0") Integer page, 
